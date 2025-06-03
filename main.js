@@ -561,7 +561,7 @@ ytData.forEach((yt) => {
   // PDF screens
   const pdfData = [
   {
-    pdfUrl: 'file/sistem multimedia komplit.pdf',
+    pdfUrl: 'file/Irys _ What a Datachain Is.pdf',
     thumbUrl: 'file/buku_pak_ahmad.png', // ini harus kamu buat dulu gambarnya
     position: new THREE.Vector3(9.8, 3, 0)
   },
