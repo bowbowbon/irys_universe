@@ -566,12 +566,12 @@ ytData.forEach((yt) => {
     position: new THREE.Vector3(9.8, 3, 0)
   },
   {
-    pdfUrl: 'file/34360.pdf',
+    pdfUrl: 'file/Irys _ What a Datachain Is.pdf',
     thumbUrl: 'file/buku_distributed.png',
     position: new THREE.Vector3(9.8, 3, 3)
   },
   {
-    pdfUrl: 'file/Ste90-2_245.pdf',
+    pdfUrl: 'file/Irys _ What a Datachain Is.pdf',
     thumbUrl: 'file/buku3.png',
     position: new THREE.Vector3(9.8, 3, 6)
   },
