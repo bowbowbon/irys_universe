@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IRYS UNIVERSE</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="ui-overlay">
+            <!-- Loading Screen -->
+            <div id="loadingScreen" class="loading-screen">
+                <div>IRYS UNIVERSE</div>
+                <div>Loading Virtual Class...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Main Menu -->
+            <div id="mainMenu" class="menu-overlay hidden">
+                <h1>IRYS UNIVERSE</h1>
+                <p style="margin-bottom: 30px;">Welcome to Irys Universe Class</p>
+                <button class="menu-btn" onclick="startGame()">Enter The Portal</button>
+                <button class="menu-btn" onclick="showInstructions()">How to play</button>
+            </div>
+
+            <!-- Instructions -->
+            <div id="instructionsMenu" class="menu-overlay hidden">
+                <h2>How to play</h2>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Control:</strong></p>
+                    <p>• WASD - Move</p>
+                    <p>• Mouse - Look Around</p>
+                    <p>• Click - Interact with object</p>
+                    <p>• ESC - Exit from interaction mode</p>
+                </div>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>How to Learn:</strong></p>
+                    <p>• Move to the whiteboard for quizzes and crosswords</p>
+                    <p>• Move to the wall to watch educational videos</p>
+                    <p>• Explore the classroom to find materials or quest</p>
+                </div>
+                <button class="menu-btn" onclick="hideInstructions()">Back</button>
+            </div>
+
+            <!-- Game Controls -->
+            <div id="gameControls" class="controls hidden">
+                <div><strong>Control:</strong></div>
+                <div>WASD - Move</div>
+                <div>Mouse - Look around</div>
+                <div>Click - Intract</div>
+                <div>ESC - Menu</div>
+            </div>
+
+            <!-- Crosshair -->
+            <div id="crosshair" class="crosshair hidden"></div>
+
+            <!-- Whiteboard Menu Panel -->
+            <div id="whiteboardMenu" class="menu-overlay hidden">
+                <h2>📋 Choose Activity</h2>
+                <button class="btn" onclick="openQuiz()">🧠 Quiz</button>
+                <button class="btn" onclick="openCrossword()">🔤 Crossword</button>
+                <button class="btn" onclick="hideWhiteboardMenu()">✕ Close</button>
+            </div>
+
+            <!-- Quiz Panel -->
+            <div id="quizPanel" class="quiz-panel hidden">
+                <button class="close-btn" onclick="closePanel('quiz')">✕ Close</button>
+                <h2 style="color: #667eea; margin-bottom: 20px;">🧠 Quiz </h2>
+                <div id="quizContent">
+                    <div class="question">
+                        <h3 id="questionText">The question will appear here...</h3>
+                        <div id="optionsContainer" class="options"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="nextBtn" class="btn" onclick="nextQuestion()" style="display: none;">Next question</button>
+                    </div>
+                </div>
+                <div id="quizResult" style="display: none; text-align: center;">
+                    <h3>Quiz done! 🎉</h3>
+                    <p id="finalScore">Your Score: 0/0</p>
+                    <button class="btn" onclick="restartQuiz()">Try Again</button>
+                </div>
+            </div>
+
+            <!-- Crossword Panel -->
+            <div id="crosswordPanel" class="crossword-panel hidden">
+                <button class="close-btn" onclick="closePanel('crossword')">✕ Close</button>
+                <h2 style="color: #667eea; margin-bottom: 20px;">🔤 Crossword</h2>
+                <div class="crossword-grid" id="crosswordGrid"></div>
+                <div class="clues">
+                    <div class="clue-section">
+                        <h3>Across</h3>
+                        <div id="acrossClues"></div>
+                    </div>
+                    <div class="clue-section">
+                        <h3>Down</h3>
+                        <div id="downClues"></div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="checkCrossword()">Check the answer</button>
+                    <button class="btn" onclick="resetCrossword()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Video Panel -->
+            <div id="videoPanel" class="video-panel hidden">
+                <button class="close-btn" onclick="closePanel('video')">✕ Close</button>
+                <h2 style="color: #667eea; margin-bottom: 20px;">🎥 Portal</h2>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">🎨</div>
+                        <div class="video-info">
+                            <h3>Pengenalan Multimedia</h3>
+                            <p>Pelajari konsep dasar multimedia dan aplikasinya.</p>
+                            <div class="video-embed">
+                                <iframe width="100%" height="315" src="https://portal.irys.xyz/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">🖼️</div>
+                        <div class="video-info">
+                            <h3>Grafik Digital</h3>
+                            <p>Memahami jenis-jenis grafik dan penggunaannya.</p>
+                            <div class="video-embed">
+                                <iframe width="560" height="315" src="https://irys.xyz/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail">🎵</div>
+                        <div class="video-info">
+                            <h3>Desain Grafis</h3>
+                            <p>Pengenalan Desain Grafis.</p>
+                            <div class="video-embed">
+                                <iframe width="560" height="315" src="https://app.galxe.com/quest/Irys?sort=Trending" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube Video Panel -->
+            <div id="youtubePanel" class="video-panel hidden">
+                <button class="close-btn" onclick="closePanel('youtube')">✕ Close</button>
+                <h2 style="color: #667eea;">Irys Universe</h2>
+                <iframe id="youtubeIframe" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <!-- PDF Panel -->
+            <div id="pdfPanel" class="video-panel hidden">
+                <button class="close-btn" onclick="closePanel('pdf')">✕ Close</button>
+                <h2 style="color: #667eea;">📄 Dokumen PDF</h2>
+                <iframe id="pdfIframe" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
