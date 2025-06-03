@@ -331,7 +331,7 @@ function createVideoAndPDFScreens() {
     const pdfScreen = new THREE.Mesh(pdfScreenGeometry, screenMaterial);
     pdfScreen.position.set(-9.8, 1, 5);
     pdfScreen.rotation.y = Math.PI / 2;
-    pdfScreen.userData = { type: 'pdf', pdfUrl: 'files/contoh.pdf' }; // Ganti dengan path PDF kamu
+    pdfScreen.userData = { type: 'pdf', pdfUrl: 'file/pdf.pdf' }; // Ganti dengan path PDF kamu
     scene.add(pdfScreen);
     interactables.push(pdfScreen);
 
